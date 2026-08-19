@@ -34,8 +34,8 @@ yarn-error.log*
 # vercel
 .vercel
 
+# obsolete/generated build output
 /dist/
 /.wrangler/
-/outputs/
-/work/
+
 /tmp/
