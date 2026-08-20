@@ -117,7 +117,7 @@ export default function Home() {
         </nav>
         <div className="header-actions">
           <ThemeToggle />
-          <a className="header-contact" href="mailto:jobangill222@gmail.com">
+          <a className="header-contact" href="/contact">
             Let&apos;s talk <span aria-hidden="true">↗</span>
           </a>
         </div>
