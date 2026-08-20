@@ -4,6 +4,10 @@ import "./globals.css";
 export const metadata: Metadata = {
   title: "Jobanpreet Singh — Full Stack Developer",
   description: "Portfolio of Jobanpreet Singh, a full stack developer building scalable SaaS, AI media and real-time web products.",
+  icons: {
+    icon: [{ url: "/favicon.svg", type: "image/svg+xml" }],
+    shortcut: "/favicon.svg",
+  },
 };
 
 export default function RootLayout({ children }: Readonly<{ children: React.ReactNode }>) {
