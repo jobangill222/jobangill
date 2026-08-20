@@ -1,3 +1,5 @@
+import { ThemeToggle } from "./ThemeToggle";
+
 const skills = [
   {
     number: "01",
@@ -105,9 +107,12 @@ export default function Home() {
           <a href="#experience">Experience</a>
           <a href="#about">About</a>
         </nav>
-        <a className="header-contact" href="mailto:jobangill222@gmail.com">
-          Let&apos;s talk <span aria-hidden="true">↗</span>
-        </a>
+        <div className="header-actions">
+          <ThemeToggle />
+          <a className="header-contact" href="mailto:jobangill222@gmail.com">
+            Let&apos;s talk <span aria-hidden="true">↗</span>
+          </a>
+        </div>
       </header>
 
       <section className="hero" id="top">
