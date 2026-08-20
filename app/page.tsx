@@ -137,7 +137,7 @@ export default function Home() {
           </p>
           <div className="hero-actions">
             <a className="button button-primary" href="#work">Explore my work <span aria-hidden="true">↓</span></a>
-            <a className="button button-ghost" href="/Jobanpreet_Singh_Resume.pdf" download>Download résumé</a>
+            <a className="button button-ghost" href="/Jobanpreet_Singh_Resume.pdf" download>Download resume</a>
           </div>
         </div>
         <div className="hero-orbit" aria-hidden="true">
@@ -239,13 +239,15 @@ export default function Home() {
         </a>
         <div className="contact-details">
           <span>Ludhiana, Punjab, India</span>
-          <a href="tel:+918146994995">+91 81469 94995</a>
           <a href="https://www.linkedin.com/in/joban-gill-b3778b1aa" target="_blank" rel="noreferrer">LinkedIn ↗</a>
         </div>
       </section>
 
       <footer>
-        <a className="brand footer-brand" href="#top"><span>JS</span><strong>Jobanpreet Singh</strong></a>
+        <a className="brand footer-brand" href="#top" aria-label="Jobanpreet Singh, back to top">
+          <Image className="brand-image footer-brand-image" src="/profile_image.jpeg" alt="" width={40} height={40} />
+          <strong>Jobanpreet Singh</strong>
+        </a>
         <p>Full Stack Developer · Crafted with care.</p>
         <a href="#top">Back to top ↑</a>
       </footer>
