@@ -21,6 +21,15 @@ export async function POST(request: Request) {
     const contact = typeof body.contact === "string" ? body.contact.trim() : "";
     const description = typeof body.description === "string" ? body.description.trim() : "";
     const website = typeof body.website === "string" ? body.website.trim() : "";
+    const source = body.source === "guided-chat" ? "guided-chat" : "contact-page";
+    const transcript = Array.isArray(body.transcript)
+      ? body.transcript.slice(0, 10).flatMap((entry) => {
+          if (!entry || typeof entry !== "object") return [];
+          const question = "question" in entry && typeof entry.question === "string" ? entry.question.trim().slice(0, 200) : "";
+          const answer = "answer" in entry && typeof entry.answer === "string" ? entry.answer.trim().slice(0, 200) : "";
+          return question && answer ? [{ question, answer }] : [];
+        })
+      : [];
 
     // Silently accept submissions caught by the bot honeypot.
     if (website) return NextResponse.json({ message: "Message sent." });
@@ -50,13 +59,18 @@ export async function POST(request: Request) {
     const safeName = escapeHtml(name);
     const safeContact = escapeHtml(contact);
     const safeDescription = escapeHtml(description).replace(/\n/g, "<br />");
+    const transcriptText = transcript.map((entry, index) => `${index + 1}. ${entry.question}\n   ${entry.answer}`).join("\n");
+    const transcriptHtml = transcript
+      .map((entry) => `<tr><td style="padding:8px;border-bottom:1px solid #ddd"><strong>${escapeHtml(entry.question)}</strong><br />${escapeHtml(entry.answer)}</td></tr>`)
+      .join("");
+    const emailTitle = source === "guided-chat" ? "New guided project enquiry" : "New portfolio enquiry";
 
     const emailPayload: Record<string, unknown> = {
       from: sender,
       to: [recipient],
-      subject: `New portfolio enquiry from ${name}`,
-      text: `Name: ${name}\nPhone or email: ${contact}\n\nProject description:\n${description}`,
-      html: `<h2>New portfolio enquiry</h2><p><strong>Name:</strong> ${safeName}</p><p><strong>Phone or email:</strong> ${safeContact}</p><p><strong>Project description:</strong></p><p>${safeDescription}</p>`,
+      subject: `${emailTitle} from ${name}`,
+      text: `Name: ${name}\nPhone or email: ${contact}${transcriptText ? `\n\nGuided conversation:\n${transcriptText}` : ""}\n\nProject description:\n${description}`,
+      html: `<h2>${emailTitle}</h2><p><strong>Name:</strong> ${safeName}</p><p><strong>Phone or email:</strong> ${safeContact}</p>${transcriptHtml ? `<h3>Guided conversation</h3><table style="border-collapse:collapse;width:100%">${transcriptHtml}</table>` : ""}<h3>Project description</h3><p>${safeDescription}</p>`,
     };
 
     if (isEmail) emailPayload.reply_to = contact;

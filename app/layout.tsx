@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { ChatBox } from "./ChatBox";
 import "./globals.css";
 
 export const metadata: Metadata = {
@@ -20,7 +21,10 @@ export default function RootLayout({ children }: Readonly<{ children: React.Reac
           }}
         />
       </head>
-      <body>{children}</body>
+      <body>
+        {children}
+        <ChatBox />
+      </body>
     </html>
   );
 }
