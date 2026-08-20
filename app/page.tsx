@@ -1,4 +1,5 @@
 import { ThemeToggle } from "./ThemeToggle";
+import Image from "next/image";
 
 const skills = [
   {
@@ -99,7 +100,14 @@ export default function Home() {
     <main>
       <header className="site-header">
         <a className="brand" href="#top" aria-label="Jobanpreet Singh, home">
-          <span>JS</span>
+          <Image
+            className="brand-image"
+            src="/profile_image.jpeg"
+            alt=""
+            width={40}
+            height={40}
+            priority
+          />
           <strong>Jobanpreet Singh</strong>
         </a>
         <nav aria-label="Primary navigation">

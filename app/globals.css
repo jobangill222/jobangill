@@ -83,6 +83,16 @@ nav a:hover, .header-contact:hover { opacity: .55; }
 :root[data-theme="dark"] .theme-icon-moon { opacity: 0; transform: scale(.55) rotate(30deg); }
 :root[data-theme="dark"] .theme-icon-sun { opacity: 1; transform: scale(1) rotate(0); }
 
+
+.brand-image {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  object-fit: cover;
+  object-position: center;
+  border: 1px solid var(--line);
+}
+
 .hero {
   min-height: 705px;
   padding: 78px clamp(24px, 7.5vw, 120px) 72px;
